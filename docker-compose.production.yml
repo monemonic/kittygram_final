@@ -3,7 +3,6 @@ version: '3'
 volumes:
   pg_data:
   static:
-  media:
 
 services:
   db:
@@ -15,17 +14,12 @@ services:
   backend:
     image: devlil/kittygram_backend
     env_file: .env
-    depends_on:
-      - db
     volumes:
       - static:/static
-      - media:/app/media
 
   frontend:
     image: devlil/kittygram_frontend
     env_file: .env
-    depends_on:
-      - backend  
     command: cp -r /app/build/. /static/
     volumes:
       - static:/static
@@ -33,10 +27,7 @@ services:
   gateway:
     image: devlil/kittygram_gateway
     env_file: .env
-    depends_on:
-      - frontend  
     ports:
       - 9000:80
     volumes:
       - static:/static
-      - media:/app/media
