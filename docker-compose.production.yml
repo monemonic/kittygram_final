@@ -12,20 +12,20 @@ services:
       - pg_data:/var/lib/postgresql/data
 
   backend:
-    image: devlil/kittygram_backend
+    image: monemonic95/kittygram_backend
     env_file: .env
     volumes:
       - static:/static
 
   frontend:
-    image: devlil/kittygram_frontend
+    image: monemonic95/kittygram_frontend
     env_file: .env
     command: cp -r /app/build/. /static/
     volumes:
       - static:/static
 
   gateway:
-    image: devlil/kittygram_gateway
+    image: monemonic95/kittygram_gateway
     env_file: .env
     ports:
       - 9000:80
