@@ -15,8 +15,6 @@ services:
   backend:
     image: monemonic95/kittygram_backend
     env_file: .env
-    depends_on:
-      - db
     volumes:
       - static:/static
       - media:/app/media
@@ -24,8 +22,6 @@ services:
   frontend:
     image: monemonic95/kittygram_frontend
     env_file: .env
-    depends_on:
-      - backend  
     command: cp -r /app/build/. /static/
     volumes:
       - static:/static
@@ -33,8 +29,6 @@ services:
   gateway:
     image: monemonic95/kittygram_gateway
     env_file: .env
-    depends_on:
-      - frontend  
     ports:
       - 9000:80
     volumes:
