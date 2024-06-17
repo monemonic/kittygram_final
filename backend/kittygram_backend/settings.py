@@ -2,13 +2,15 @@
 import os
 from pathlib import Path
 
+import django.core.management.utils
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-cg6*%6d51ef8f#4!r3*$vmxm4)abgjw8mo!4y-q*uq1!4$-89$'
+SECRET_KEY = os.getenv('SECRET_KEY', django.core.management.utils.get_random_secret_key())
 
-DEBUG = True
+DEBUG = os.getenv('DEBUG', False)
 
-ALLOWED_HOSTS = ['158.160.10.48', '127.0.0.1', 'localhost', 'kitty.itkomi11.ru']
+ALLOWED_HOSTS = [os.getenv('ALLOWED_HOSTS', [])]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
